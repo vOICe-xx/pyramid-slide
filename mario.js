@@ -43,7 +43,6 @@ function drawPyramid(vrange){
   }
 }
 var vlrange = document.createElement("div");
-vlrange.id = "counter";
 iRange.addEventListener("input", function(event){
 pyr.innerHTML = '';
 vlrange.innerHTML = '';
