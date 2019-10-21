@@ -68,6 +68,11 @@
 				height: 50%;
 				width: 55%;
 			}
+			#slider {
+				dislpay: flex;
+				height: 70%;
+				width: 40%;
+			}
 			#pyramid {
 				display: flex;
 				justify-content: center;
@@ -98,7 +103,7 @@
 						<div id="Menuspace"></div>
 						<div id="high">
 							<div>How High?</div>
-							<div><input id="slider" type="range" min="1" max="24" value="8"></div>
+							<input id="slider" type="range" min="0" max="24" step="1" value="12">
 						</div>
 				</div>
 			<div id="pyramid-block"> 
@@ -106,6 +111,10 @@
 			</div>
 
 		</div>
+	<script
+		src="http://code.jquery.com/jquery-3.4.1.min.js"
+		integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+		crossorigin="anonymous"></script>
     <script src="mario.js"></script>
   </body>
 </html>

@@ -1,56 +1,58 @@
-const iRange = document.getElementById("slider");
-const pyr = document.getElementById("pyramid")
-const select = document.getElementById("select");
-const high = document.getElementById("high");
+const iRange = $( "#slider" );
+const pyr = $( "#pyramid" );
+const select = $( "#select" );
+const high = $( "#high" );
+
 function drawPyramid(vrange){
-	const symind = select.options.selectedIndex;
-	var sym = document.getElementById("select").options[symind].value;
-	var vrange = iRange.value;
+	const symind = select.val();
+	var sym = symind;
+	var vrange = iRange.val();
 	for (var row = 1; row <= vrange; row++){
-		var pRaw = document.createElement("div");
-		pRaw.classList.add("row");
-		pRaw.id = "row" + row;
-		pyr.appendChild(pRaw)
-		var blEnd = document.createElement("div");
-		blEnd.innerHTML = sym;
-		blEnd.classList.add("block");
-		blEnd.id = "blockEnd";
+		var pRow = $( "<div/>",{
+		'class': "row",
+		id: "row" + row
+		}).appendTo(pyr);
+		var blEnd = $( "<div/>",{
+		'class': "block",
+		id: "blockEnd"
+		});
+		blEnd.html(sym);
 		let nSp = 0;
 		let nBl = 0;
 		for (var col = 1; col <= vrange; col++){
-			var sp = document.createElement("div");
-			sp.innerHTML = " ";
-			sp.classList.add("block");
-			sp.id = "block";
+			var sp = $( "<div/>",{
+			"class": "block",
+			id: "block"
+			});
+			sp.html(' ');
 			if (vrange - row < col){
-				var bl = document.createElement("div");
-				bl.classList.add("block");
-				bl.id = "block" + row + "-" + nBl;
-				bl.innerHTML = sym;
-				document.getElementById("row" + row).appendChild(bl);
+				var bl = $( "<div/>", { 
+				'class': "block",
+				id: "block" + row + "-" + nBl
+				}).appendTo(pRow);
 				nBl += 1;
 			}
 			else {
-				var sp = document.createElement("div");
-				sp.classList.add("space");
-				sp.id = "space" + row + "-" + nSp;
-				document.getElementById("row" + row).appendChild(sp);
+				var sp = $( "<div/>", { 
+				'class': "space",
+				id: "space" + row + "-" + nSp
+				}).appendTo(pRow);
 				nSp += 1;
 			}
-    }
-		document.getElementById("row" + row).appendChild(blEnd);
-
-  }
+		}
+		blEnd.appendTo(pRow);
+	}
+	$( '.block' ).text(sym);
 }
-var vlrange = document.createElement("div");
-iRange.addEventListener("input", function(event){
-pyr.innerHTML = '';
-vlrange.innerHTML = '';
-drawPyramid();
-vlrange.innerHTML = iRange.value;
-high.appendChild(vlrange);
+var vlrange = $('<div/>');
+iRange.change(function(){
+	pyr.html("");
+	vlrange.html('');
+	drawPyramid();
+	vlrange.html(iRange.val());
+	vlrange.appendTo(high);
 });
-select.addEventListener("input", function(event) {
-pyr.innerHTML = '';
-drawPyramid();
+select.change(function() {
+	pyr.html('');
+	drawPyramid();
 });
